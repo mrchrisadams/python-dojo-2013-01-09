@@ -2,10 +2,11 @@
 # pull in our repo object
 from git import Repo
 from collections import deque
+from datetime import datetime
 
 # then fetch a repo from somewhere
 # ./
-PATH = "/Users/chrisadams/Code/python-dojo-2013-01-09/styles"
+PATH = "/Users/chrisadams/Code/python-dojo-2013-01-09"
 GIT_MAP = {}
 
 def _walk(tree):
@@ -52,7 +53,7 @@ if __name__ == '__main__':
     master_head_commit = repo.head.reference.commit
     contents = set(current_contents(master_head_commit))
     times = repo2dict(master_head_commit)
-    d = {k: v for k, v in times.items() if k in contents}
+    d = {k: datetime.fromtimestamp(v).isoformat(' ') for k, v in times.items() if k in contents}
     from pprint import pprint
     pprint(d)
 
